@@ -57,8 +57,9 @@ namespace Messi_Omura
 
 		private void buttonKeys_Click(object sender, EventArgs e)
 		{
-			textBoxDecodeA.Text = Inverse(new BigInt(textBoxEncodeA.Text), new BigInt(textBoxModule.Text)).ToString();
-			textBoxDecodeB.Text = Inverse(new BigInt(textBoxEncodeB.Text), new BigInt(textBoxModule.Text)).ToString();
+			BigInt module = new BigInt(textBoxModule.Text) - new BigInt("1");
+			textBoxDecodeA.Text = Inverse(new BigInt(textBoxEncodeA.Text), module).ToString();
+			textBoxDecodeB.Text = Inverse(new BigInt(textBoxEncodeB.Text), module).ToString();
 		}
 
 		private void buttonSendA_Click(object sender, EventArgs e)
@@ -78,7 +79,7 @@ namespace Messi_Omura
 			BigInt p = new BigInt(textBoxModule.Text);
 			BigInt ea = new BigInt(textBoxEncodeA.Text);
 			BigInt message = new BigInt(textBoxA.Text);
-			textBoxA.Text = ((message * ea) % p).ToString();
+			textBoxA.Text = BigInt.Pow(message, ea, p).ToString();
 		}
 
 		private void buttonDecodeB_Click(object sender, EventArgs e)
@@ -86,7 +87,7 @@ namespace Messi_Omura
 			BigInt p = new BigInt(textBoxModule.Text);
 			BigInt eb = new BigInt(textBoxEncodeB.Text);
 			BigInt message = new BigInt(textBoxB.Text);
-			textBoxB.Text = ((message * eb) % p).ToString();
+			textBoxB.Text = BigInt.Pow(message, eb, p).ToString();
 		}
 
 		private void buttonDecodeA_Click(object sender, EventArgs e)
@@ -94,7 +95,7 @@ namespace Messi_Omura
 			BigInt p = new BigInt(textBoxModule.Text);
 			BigInt da = new BigInt(textBoxDecodeA.Text);
 			BigInt message = new BigInt(textBoxA.Text);
-			textBoxA.Text = ((message * da) % p).ToString();
+			textBoxA.Text = BigInt.Pow(message, da, p).ToString();
 		}
 
 		private void buttonEncodeB_Click(object sender, EventArgs e)
@@ -102,7 +103,7 @@ namespace Messi_Omura
 			BigInt p = new BigInt(textBoxModule.Text);
 			BigInt db = new BigInt(textBoxDecodeB.Text);
 			BigInt message = new BigInt(textBoxB.Text);
-			textBoxB.Text = ((message * db) % p).ToString();
+			textBoxB.Text = BigInt.Pow(message, db, p).ToString();
 		}
 	}
 }

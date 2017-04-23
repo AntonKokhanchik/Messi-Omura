@@ -321,6 +321,30 @@ namespace Messi_Omura
 			return Division(left, right, DivisionMode.rest);
 		}
 
+		public static BigInt Pow(BigInt basis, BigInt _rank, BigInt module)
+		{
+			BigInt a = basis;
+			BigInt rank = _rank;
+			BigInt b = new BigInt("1");
+			while (rank > new BigInt("0"))
+			{
+
+				BigInt r = rank % new BigInt("2");
+				BigInt q = rank / new BigInt("2");
+				if (r == new BigInt("0"))
+				{
+					rank = q;
+					a = (a * a) % module;
+				}
+				else
+				{
+					rank -= new BigInt("1");
+					b = (b * a) % module;
+				}
+			}
+			return b;
+		}
+
 		public override string ToString()
 		{
 			StringBuilder str = new StringBuilder();
